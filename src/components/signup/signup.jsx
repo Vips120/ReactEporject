@@ -1,99 +1,133 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { connect } from "react-redux";
-import {UserRegister} from "../../redux/action/user/user";
+import SimpleReactValidator from "simple-react-validator";
+import { UserRegister } from "../../redux/action/user/user";
+import {Alert} from "react-bootstrap";
+import "./signup.css";
 class Signup extends Component {
-    render() {
-        return (
-            <div className="container">
-                <div class="view full-page-intro">
-        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-          <div class="container">
-            <div class="row wow fadeIn">
-              <div class="col-md-6 mb-4 white-text text-center text-md-left">
-                <h1 class="display-4 font-weight-bold">Sign UP</h1>
-                <hr class="hr-light"/>
-                <p>
-                  <strong>For the more information</strong>
-                </p>
-                <p class="mb-4 d-none d-md-block">
-                  <strong>Quickly get information from new leads and customers by signing up .WIth their information, you can funnel them into new accounts in an instant.Follow us on FACEBOOK</strong>
-                                    </p>
-                                    <button type="button" class="btn btn-outline-primary"
-                                      
-                                    >
-                                        <Link to="/login"
-                                        >Login</Link></button>
+  constructor() {
+    super();
+    this.validator = new SimpleReactValidator({ autoForceUpdate: this });
+    this.state = {
+      FirstName: "",
+      LastName: "",
+      EmailId: "",
+      Password: ""
+    };
+  };
 
-              </div>
-              <div class="col-md-6 col-xl-5 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <form>
-                      <p class="h4 text-center mb-4">Sign up</p>
-                      <div class="md-form">
-                         <i class="fa fa-user prefix grey-text"></i>
-                         <input type="text" id="materialFormRegisterNameEx" class="form-control"/>
-                         <label for="materialFormRegisterNameEx">Your name</label>
-                      </div>
-                      <div class="md-form">
-                         <i class="fa fa-envelope prefix grey-text"></i>
-                         <input type="email" id="materialFormRegisterEmailEx" class="form-control"/>
-                         <label for="materialFormRegisterEmailEx">Your email</label>
-                      </div>
-                      <div class="md-form">
-                         <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                         <input type="email" id="materialFormRegisterConfirmEx" class="form-control"/>
-                         <label for="materialFormRegisterConfirmEx">Confirm your email</label>
-                      </div>
-                      <div class="md-form">
-                        <i class="fa fa-lock prefix grey-text"></i>
-                        <input type="password" id="materialFormRegisterPasswordEx" class="form-control"/>
-                        <label for="materialFormRegisterPasswordEx">Your password</label>
-                      </div>
-                      <div class="md-form">
-                            <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                            <input type="password" id="materialFormRegisterConfirmEx" class="form-control"/>
-                            <label for="materialFormRegisterPasswordEx">Confirm Your password</label>
-                      </div>
-                      <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="defaultCheck12"/>                            <label for="defaultCheck12" class="grey-text">Accept the
-                                <a href="#" class="blue-text"> Terms and Conditions</a>
-                            </label>
-                        </div>
-                      <div class="text-center mt-4">
-                       <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">Register</button>
-                       <div class="modal fade" id="myModal" role="dialog">
-                         <div class="modal-dialog"> 
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                        <h4 class="modal-title">OOPS!</h4>
-                                  <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
-                                <div class="modal-body">
-                                  <p>Connection ERROR.........!</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                              </div>
-                            </div>
+   Inputdata = e => {
+     this.setState({ [e.target.name]: e.target.value });
+  };
+  handleFormSubmit = e => {
+    e.preventDefault();
+    if (this.validator.allValid()) {
+      let item = {
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
+        EmailId: this.state.EmailId,
+        Password: this.state.Password
+      };
+      this.props.UserRegister(item);
+    } else {
+      this.validator.showMessages();
+      this.forceUpdate();
+    }
+  }
+  render() { 
+   
+      return (
+        <div className="container">
+          <div className="view full-page-intro">
+            <div className="mask rgba-black-light d-flex justify-content-center align-items-center">
+              <div className="container">
+                <div className="row wow fadeIn">
+                  <div className="col-md-6 mb-4 white-text text-center text-md-left">
+                    <h1 className="display-4 font-weight-bold">Sign UP</h1>
+                    <hr className="hr-light" />
+                    <p>
+                      <strong>For the more information</strong>
+                    </p>
+                    <p className="mb-4 d-none d-md-block">
+                      <strong>Quickly get information from new leads and customers by signing up .WIth their information, you can funnel them into new accounts in an instant.Follow us on FACEBOOK</strong>
+                    </p>
+                    <button type="button" className="btn btn-outline-primary"
+                                      
+                    >
+                      <Link to="/login"
+                      >Login</Link></button>
+
+                  </div>
+                  <div className="col-md-6 col-xl-5 mb-4">
+                    <div className="card">
+                      <div className="card-body">
+                      {this.props.error ? <div className="alert alert-danger">hey, {this.props.error} </div> : null }
+                        
+                        <form onSubmit={this.handleFormSubmit}>
+                          <p className="h4 text-center mb-4">Sign up</p>
+                          <div className="md-form">
+                            <i className="fa fa-user prefix grey-text"></i>
+                            <label htmlFor="materialFormRegisterNameEx">Your Firstname</label>
+                            <input type="text" id="materialFormRegisterNameEx" className="form-control"
+                              name="FirstName"
+                              value={this.state.FirstName}
+                              onChange={this.Inputdata}
+                            />
+                            {this.validator.message("FirstName", this.state.FirstName, "required|min:4|max:100")}
+                        
                           </div>
-                                                                  </div>
-                  </form> 
+                          <div className="md-form">
+                            <i className="fa fa-envelope prefix grey-text"></i>
+                            <label htmlFor="materialFormRegisterEmailEx">Your Lastname</label>
+                            <input type="text" id="materialFormRegisterEmailEx" className="form-control"
+                              name="LastName"
+                              value={this.state.LastName}
+                              onChange={this.Inputdata}
+                            />
+                            {this.validator.message("LastName", this.state.LastName, "required|min:4|max:100")}
+                        
+                          </div>
+                          <div className="md-form">
+                            <i className="fa fa-exclamation-triangle prefix grey-text"></i>
+                            <label htmlFor="materialFormRegisterConfirmEx">Your EmailId</label>
+                            <input type="email" id="materialFormRegisterConfirmEx" className="form-control"
+                              name="EmailId"
+                              value={this.state.EmailId}
+                              onChange={this.Inputdata}
+                            />
+                            {this.validator.message("EmailId", this.state.EmailId, "required|email")}
+                        
+                          </div>
+                          <div className="md-form">
+                            <i className="fa fa-lock prefix grey-text"></i>
+                            <label htmlFor="materialFormRegisterPasswordEx">Your password</label>
+                            <input type="password" id="materialFormRegisterPasswordEx" className="form-control"
+                              name="Password"
+                              value={this.state.Password}
+                              onChange={this.Inputdata}
+                                
+                            />
+                            {this.validator.message("Password", this.state.Password, "required|min:4|max:100")}
+                    
+                          </div>
+                          <div className="text-center mt-4">
+                            <button className="btn btn-primary" type="submit">Register</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-</div>
-            </div>
-        )
+      );
     }
 }
 const mapStateToProps = state => {
   console.log(state);
-  return state;
+  return {error: state.register.message_error};
 }
 export default connect(mapStateToProps, {UserRegister})(Signup);
