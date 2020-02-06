@@ -1,6 +1,34 @@
-import { USER_REGISTER,ERROR } from "./user.type";
-import { userRegister } from "../../api/user/register";
-import { history } from "../../history/index";
+import { USER_REGISTER,ERROR, LOGIN_USER, LOGOUT,LOGGED_USER,PRE_LOADER } from "./user.type";
+import { userRegister,userLogin,loggedInUser } from "../../api/user/register";
+import { history } from "../../../shared/helpers/history/index";
+
+
+export const Loginuser = (item) => {
+    return async dispatch => {
+        try {
+            let user = await userLogin(item);
+            localStorage.setItem("currentuser", JSON.stringify(user));
+            dispatch({ type: LOGIN_USER, payload: user.data });
+            alert("Login Done!");
+            dispatch({type: PRE_LOADER})
+            history.push("/home");
+        }
+        catch (ex) {
+            dispatch({ type: ERROR, payload: ex.response.data });
+        }
+    
+    }
+    
+};
+export const logOut = () => {
+    return async dispatch => {
+        localStorage.removeItem("currentuser");
+        dispatch({ type: LOGOUT });
+        history.push("/login");
+        window.location.reload();
+    }
+}
+
 export const UserRegister = (item) => {
     return async dispatch => {
         try {
@@ -12,7 +40,19 @@ export const UserRegister = (item) => {
             window.location.reload();
         }
         catch (ex) {
-            dispatch({type: ERROR, payload:ex.response.data})
-         }
+            dispatch({ type: ERROR, payload: ex.response.data })
+        }
     }
-}
+};
+
+export const UserLogged = () => {
+    return async dispatch => {
+        try {
+            let fetchloggedIndata = await loggedInUser();
+            dispatch({ type: LOGGED_USER, payload: fetchloggedIndata.data });
+        }
+        catch (ex) {
+            dispatch({ type: ERROR, payload: ex.response.data });
+        }
+    }
+};

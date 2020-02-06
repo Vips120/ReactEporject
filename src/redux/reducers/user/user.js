@@ -1,5 +1,22 @@
-import { USER_REGISTER, ERROR } from "../../action/user/user.type";
+import { USER_REGISTER, ERROR, LOGIN_USER,PRE_LOADER,LOGGED_USER } from "../../action/user/user.type";
+const INITIAL_STATE = () => {
+    let user = JSON.parse(localStorage.getItem("currentuser"));
+    return user ? { loggedin: true, user } : null;
+};
 
+export const LoginUser = (state=INITIAL_STATE(), action) => {
+    switch (action.type) {
+        case LOGIN_USER:
+            return { ...state, user: action.payload,loggedin:false };
+        case ERROR:
+            return { message_error: action.payload, loggedin:false };
+        case PRE_LOADER:
+            return { loggedin: true };
+        case LOGGED_USER:
+            return { currentuserdata: action.payload, loggedin:false };
+        default: return state;
+  }
+};
 export const RegisterUser = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER:
@@ -8,5 +25,5 @@ export const RegisterUser = (state = {}, action) => {
             return { message_error: action.payload }
         default:
             return state;
-     }
-}
+    }
+};
