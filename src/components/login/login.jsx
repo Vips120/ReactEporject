@@ -32,7 +32,6 @@ class Login extends Component {
   };
 
   render() {
-   
         return (
             <div className="container">
             <h2>LOGIN PAGE</h2>
@@ -52,7 +51,7 @@ class Login extends Component {
                   onChange={this.handleInput}
                 />
  {this.validator.message("Password", this.state.Password, "required|min:3|max:100")}
-    <button type="submit">Login</button> {this.props.error ? <Spinner/>: null}
+    <button type="submit">Login</button> {this.props.user.loggedin ? <Spinner/>: null}
   </div>
 
                     <div className="container" style={{backgroundColor:"#f1f1f1"}}>
@@ -69,7 +68,8 @@ class Login extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    error: state.login
+    user: state.login,
+    error: state.login.message_error
   }
 }
 
