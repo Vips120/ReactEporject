@@ -1,6 +1,7 @@
 import { USER_REGISTER, ERROR, LOGIN_USER,PRE_LOADER,LOGGED_USER } from "../../action/user/user.type";
 const INITIAL_STATE = () => {
     let user = JSON.parse(localStorage.getItem("currentuser"));
+    //keep false value empty object not null
     return user ? { loggedin: true, user } : {};
 };
 

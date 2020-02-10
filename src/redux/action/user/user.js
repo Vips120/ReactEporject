@@ -13,6 +13,7 @@ export const Loginuser = (item) => {
             alert("Login Done!");
             dispatch({type: PRE_LOADER})
             history.push("/home");
+            window.location.reload();
         }
         catch (ex) {
             dispatch({ type: ERROR, payload: ex.response.data });

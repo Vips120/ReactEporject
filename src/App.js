@@ -4,6 +4,7 @@ import Header from './components/header/header';
 import Login from './components/login/login';
 import Signup from './components/signup/signup';
 import Home from './components/home/home';
+import Product from './components/shopProduct/product';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/home" exact component={Home}/>
+        <Route path="/home" exact component={Home} />
+        <Route path="/shopProduct/:id" exact component={Product}/>
       </Switch>
     </React.Fragment>
   );
