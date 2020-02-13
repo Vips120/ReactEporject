@@ -20,14 +20,23 @@ class Signup extends Component {
    Inputdata = e => {
      this.setState({ [e.target.name]: e.target.value });
   };
+  InputEmaildata = e => {
+    this.setState({ [e.target.value]: e.target.value });
+  };
+  InputPassworddata = e => {
+    this.setState({ [e.target.value]: e.target.value });
+  };
   handleFormSubmit = e => {
     e.preventDefault();
     if (this.validator.allValid()) {
       let item = {
         FirstName: this.state.FirstName,
         LastName: this.state.LastName,
-        EmailId: this.state.EmailId,
-        Password: this.state.Password
+        UserLogin: {
+         emailid: this.state.emailid,
+          password: this.state.password
+        }
+      
       };
       this.props.UserRegister(item);
     } else {
@@ -92,23 +101,23 @@ class Signup extends Component {
                             <i className="fa fa-exclamation-triangle prefix grey-text"></i>
                             <label htmlFor="materialFormRegisterConfirmEx">Your EmailId</label>
                             <input type="email" id="materialFormRegisterConfirmEx" className="form-control"
-                              name="EmailId"
-                              value={this.state.EmailId}
-                              onChange={this.Inputdata}
+                              name="emailid"
+                              value={this.state.emailid}
+                              onChange={this.InputEmaildata}
                             />
-                            {this.validator.message("EmailId", this.state.EmailId, "required|email")}
+                            {this.validator.message("emailid", this.state.emailid, "required|email")}
                         
                           </div>
                           <div className="md-form">
                             <i className="fa fa-lock prefix grey-text"></i>
                             <label htmlFor="materialFormRegisterPasswordEx">Your password</label>
                             <input type="password" id="materialFormRegisterPasswordEx" className="form-control"
-                              name="Password"
-                              value={this.state.Password}
-                              onChange={this.Inputdata}
+                              name="password"
+                              value={this.state.password}
+                              onChange={this.InputPassworddata}
                                 
                             />
-                            {this.validator.message("Password", this.state.Password, "required|min:4|max:100")}
+                            {this.validator.message("password", this.state.password, "required|min:4|max:100")}
                     
                           </div>
                           <div className="text-center mt-4">

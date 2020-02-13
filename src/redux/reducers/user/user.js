@@ -7,12 +7,12 @@ const INITIAL_STATE = () => {
 
 export const LoginUser = (state=INITIAL_STATE(), action) => {
     switch (action.type) {
+        case PRE_LOADER:
+            return { loggedin: true };
         case LOGIN_USER:
             return { ...state, user: action.payload,loggedin:false };
         case ERROR:
             return { message_error: action.payload, loggedin:false };
-        case PRE_LOADER:
-            return { loggedin: true };
         case LOGGED_USER:
             return { currentuserdata: action.payload, loggedin:false };
         default: return state;

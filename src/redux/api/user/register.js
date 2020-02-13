@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Header } from "../../../shared/helpers/history/header";
-const Register_ENDPOINT = "http://localhost:4000/api/chat/userRegister";
-const Login_ENDPOINT = "http://localhost:4000/api/chat/auth";
-const LoggedIn_ENDPOINT = "http://localhost:4000/api/chat/me";
+const Register_ENDPOINT ="http://localhost:4000/api/userRegister";
+const Login_ENDPOINT = "http://localhost:4000/api/userLogin";
+const LoggedIn_ENDPOINT = "http://localhost:4000/api/me";
 
 let config = {
     headers: {

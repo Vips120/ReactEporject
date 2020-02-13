@@ -5,6 +5,7 @@ import Login from './components/login/login';
 import Signup from './components/signup/signup';
 import Home from './components/home/home';
 import Product from './components/shopProduct/product';
+import Cart from './components/cart/cart';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/home" exact component={Home} />
-        <Route path="/shopProduct/:id" exact component={Product}/>
+        <Route path="/shopProduct/:id" exact component={Product} />
+        <Route path="/Cart" exact component={Cart}/>
       </Switch>
     </React.Fragment>
   );

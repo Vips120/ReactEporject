@@ -1,6 +1,6 @@
 import axios from "axios";
-const PRODUCT_ENDPOINT = "http://localhost:4000/api/chat/allUserData";
-const FECTH_PRODUCT_BY_ID_ENDPOINT = "http://localhost:4000/api/chat/allUserData/";
+const PRODUCT_ENDPOINT = "http://localhost:4000/api/shops/allproduct";
+const FECTH_PRODUCT_BY_ID_ENDPOINT = "http://localhost:4000/api/shops/productbyid/";
 let config = {
     headers: {
         "Content-Type": "application/json"

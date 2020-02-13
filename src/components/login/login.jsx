@@ -9,8 +9,8 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      EmailId: "",
-      Password: ""
+    emailId: "",
+      password: ""
     };
     this.validator = new SimpleReactValidator({ autoForceUpdate: this });
   };
@@ -18,9 +18,12 @@ class Login extends Component {
     e.preventDefault();
     if (this.validator.allValid()) {
       let data = {
-        EmailId: this.state.EmailId,
-        Password: this.state.Password
+        userLogin: {
+         emailId: this.state.emailId,
+          password: this.state.password
+        }
       };
+      console.log(data);
       this.props.Loginuser(data);
     } else {
       this.forceUpdate();
@@ -40,18 +43,18 @@ class Login extends Component {
 
   <div className="container">
     <label htmlFor="uname"><b>EmailId</b></label>
-                <input type="text" placeholder="Enter Emailid" name="EmailId"
-                  value={this.state.EmailId}
+                <input type="text" placeholder="Enter Emailid" name="emailId"
+                  value={this.state.emailId}
                   onChange={this.handleInput}
                 />
-               {this.validator.message("EmailId", this.state.EmailId, "required|email")}
+               {this.validator.message("emailId", this.state.emailId, "required|email")}
     <label htmlFor="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="Password"
-                  value={this.state.Password}
+                <input type="password" placeholder="Enter Password" name="password"
+                  value={this.state.password}
                   onChange={this.handleInput}
                 />
- {this.validator.message("Password", this.state.Password, "required|min:3|max:100")}
-    <button type="submit">Login</button> {this.props.user.loggedin ? <Spinner/>: null}
+ {this.validator.message("password", this.state.password, "required|min:3|max:100")}
+    <button type="submit">Login</button> {this.props.user.loggedin ? null: <Spinner/>}
   </div>
 
                     <div className="container" style={{backgroundColor:"#f1f1f1"}}>

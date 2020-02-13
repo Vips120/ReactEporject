@@ -13,7 +13,7 @@ export const Loginuser = (item) => {
             alert("Login Done!");
             dispatch({type: PRE_LOADER})
             history.push("/home");
-            window.location.reload();
+            // window.location.reload();
         }
         catch (ex) {
             dispatch({ type: ERROR, payload: ex.response.data });
@@ -27,7 +27,7 @@ export const logOut = () => {
         localStorage.removeItem("currentuser");
         dispatch({ type: LOGOUT });
         history.push("/login");
-        window.location.reload();
+        // window.location.reload();
     }
 }
 
@@ -39,7 +39,7 @@ export const UserRegister = (item) => {
             dispatch({ type: USER_REGISTER, payload: sendData.data });
             alert("Registration Done!");
             history.push("/login");
-            window.location.reload();
+            // window.location.reload();
         }
         catch (ex) {
             dispatch({ type: ERROR, payload: ex.response.data })
