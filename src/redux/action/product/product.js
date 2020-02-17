@@ -1,5 +1,5 @@
 import { FetchProduct,FetchProductId } from "../../api/products/products";
-import { FETCH_PRODUCT_DATA, LOADING, SHOW_ERROR, FETCH_PRODUCT_DATA_ID, ADD_CART, REMOVE_CART } from "./product.type";
+import { FETCH_PRODUCT_DATA, LOADING, SHOW_ERROR, FETCH_PRODUCT_DATA_ID, ADD_CART, REMOVE_CART,ADD_QUANTITY, REMOVE_QUANTITY } from "./product.type";
 import { history } from "../../../shared/helpers/history";
 
 export const ProductInfo = () => {
@@ -61,6 +61,36 @@ export const RemoveToCart = (id) => {
             let response = await FetchProductId(id);
             setTimeout(() => {
                 dispatch({ type: REMOVE_CART, payload: response.data });
+            }, 1000);
+        }
+        catch (ex) {
+            
+        }
+    }
+};
+
+export const AddQuantity = (data) => {
+    console.log(data);
+    return async dispatch => {
+        try {
+            dispatch({ type: LOADING });
+            setTimeout(() => {
+                dispatch({ type: ADD_QUANTITY, payload: data });
+            }, 1000);
+        }
+        catch (ex) {
+            
+        }
+    }
+};
+
+export const RemoveQuantity = (data) => {
+    console.log(data);
+    return async dispatch => {
+        try {
+            dispatch({ type: LOADING });
+            setTimeout(() => {
+                dispatch({ type:REMOVE_QUANTITY, payload: data });
             }, 1000);
         }
         catch (ex) {

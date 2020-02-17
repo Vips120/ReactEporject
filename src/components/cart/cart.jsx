@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner";
-import { RemoveToCart} from "../../redux/action/product/product";
+import { RemoveToCart,AddQuantity,RemoveQuantity} from "../../redux/action/product/product";
 class Cart extends Component {
     constructor(props) {
 		super(props);
 	}
 	updateQuantity = (item) => {
-	
+		this.props.AddQuantity(item);
 	};
 	removeQuantity = (item) => {
-
+		this.props.RemoveQuantity(item);
 	};
     render() {
 		if (this.props.loading) { return <Spinner /> }
@@ -61,7 +61,8 @@ class Cart extends Component {
 											{data.quantity}
 											</h3>
 											<i class="fa fa-chevron-circle-down" aria-hidden="true"
-											onClick={() => this.removeQuantity(data.item)}
+												onClick={() => this.removeQuantity(data.item)}
+											
 											></i>
 									</td>
 										<td data-th="Subtotal" className="text-center">
@@ -82,7 +83,7 @@ class Cart extends Component {
 							<tr>
 								<td><a href="#" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</a></td>
 								<td colSpan="1" className="hidden-xs"></td>
-								<td className="hidden-xs text-center"><strong>Total $150.00</strong></td>
+								<td className="hidden-xs text-center"><strong>Total ${this.props.total}.00</strong></td>
 								<td><a href="" className="btn btn-success btn-md" style={{padding:"0px 60px 0px 60px"}}>Checkout <i className="fa fa-angle-right"></i></a></td>
 							</tr>
 						</tfoot>
@@ -97,6 +98,10 @@ class Cart extends Component {
 };
 const mapStateToProps = state => {
     console.log(state);
-    return { cartItem: state.cart, loading: state.cart.loading };
+	return {
+		cartItem: state.cart,
+		loading: state.cart.loading,
+		total: state.cart.items.reduce((accumlator, nextstate) => (accumlator + nextstate.item.price * nextstate.quantity), 0)
+	};
 }
-export default connect(mapStateToProps,{RemoveToCart})(Cart);
+export default connect(mapStateToProps,{RemoveToCart,AddQuantity,RemoveQuantity})(Cart);

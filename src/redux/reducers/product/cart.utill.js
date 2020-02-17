@@ -14,9 +14,25 @@ export const CartUtility = (oldstate, nextaction) => {
   };
   
 export const AddQuantityUtilty = (oldstate, updatestate) => {
-    
+  console.log(oldstate, updatestate);
+  const existingcartItem = oldstate.find(data => data.item._id === updatestate._id);
+  console.log(existingcartItem);
+  if (existingcartItem) {
+    existingcartItem.quantity += 1;
+    return [...oldstate];
+  }
 };
 
 export const RemoveQuantityUtilty = (oldstate, removestate) => {
-
+  console.log(oldstate,removestate);
+  const existingcartItem = oldstate.find(data => data.item._id === removestate._id);
+  console.log(existingcartItem);
+  if (existingcartItem.quantity === 1) {
+    // alert(JSON.stringify(oldstate));
+    oldstate.filter(data => data.item._id !== removestate._id);
+    return oldstate;
+  } else {
+    existingcartItem.quantity -= 1;
+    return [...oldstate];
+  }
 };

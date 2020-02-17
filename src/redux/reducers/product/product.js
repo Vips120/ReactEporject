@@ -44,7 +44,7 @@ export const AddToCart = (state = INITIAL_STATE, action) => {
         case ADD_QUANTITY:
             return { ...state, loading: false, addquantity: AddQuantityUtilty(state.items, action.payload) };
             case REMOVE_QUANTITY:
-                return {...state, loading:false, addquantity: RemoveQuantityUtilty(state.items, action.payload)}
+                return {...state, loading:false, removequantity: RemoveQuantityUtilty(state.items, action.payload)}
         default:
             return state;
    }  
