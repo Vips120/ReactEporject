@@ -81,7 +81,9 @@ class Cart extends Component {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td><a href="#" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</a></td>
+								<td><a 
+								  onClick={() => this.props.history.push("/home")}
+									className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</a></td>
 								<td colSpan="1" className="hidden-xs"></td>
 								<td className="hidden-xs text-center"><strong>Total ${this.props.total}.00</strong></td>
 								<td><a href="" className="btn btn-success btn-md" style={{padding:"0px 60px 0px 60px"}}>Checkout <i className="fa fa-angle-right"></i></a></td>

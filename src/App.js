@@ -6,7 +6,7 @@ import Signup from './components/signup/signup';
 import Home from './components/home/home';
 import Product from './components/shopProduct/product';
 import Cart from './components/cart/cart';
-
+import PrivateRoute from "./shared/helpers/private.route";
 function App() {
   return (
     <React.Fragment>
@@ -15,8 +15,8 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/home" exact component={Home} />
-        <Route path="/shopProduct/:id" exact component={Product} />
+        <PrivateRoute path="/home" exact component={Home} />
+        <PrivateRoute path="/shopProduct/:id" exact component={Product} />
         <Route path="/Cart" exact component={Cart}/>
       </Switch>
     </React.Fragment>
