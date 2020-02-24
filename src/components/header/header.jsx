@@ -23,19 +23,25 @@ class Header extends Component {
                     ?
                   
                             <Nav inline="true">
-                                <i className="fa fa-cart-plus fa-3x" aria-hidden="true"
+
+<button type="button" class="btn btn-primary">
+<i className="fa fa-cart-plus fa-2x" aria-hidden="true"
                                  style={{color:"white"}}
-                                >
+                                    >  </i>
+                                    
                                     {
                                         this.props.cartItemsCount.items.length > 0
                                             ?
-                                            <h5>
+                                            <span class="badge badge-light">
                                                 { this.props.cartItemsCount.items.length}
-                                            </h5>
+                                            </span>
                                             :
                                             null
                                 }   
-                                </i>
+                                  
+</button>
+                               
+                               
                                 <Nav.Link
                                 onClick={() => this.props.logOut()}
                                 >LogOut</Nav.Link>

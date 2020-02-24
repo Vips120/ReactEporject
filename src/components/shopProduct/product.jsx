@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import image from "../../assets/logo192.png";
+import largeImage from "../../assets/photo-1531174739417-8f4435642f8d.jpg";
+import {GlassMagnifier, SideBySideMagnifier} from "react-image-magnifiers";
 import { ProductInfobyId,AddToCart } from "../../redux/action/product/product";
 import Spinner from "../spinner/spinner";
 import { Card, Button } from "react-bootstrap";
 export class Product extends Component {
     paraId;
-   imgurl = "https://via.placeholder.com/150/771796";
     constructor(props) {
         super(props);
         console.log(props);
@@ -23,13 +25,26 @@ export class Product extends Component {
      if (this.props.loading) { return <Spinner /> }
         if (!this.props.product) { return null;}
         return (
+            <div>
+                
+        
             <div className="container">
+
                 <h1>SHOP PRODUCT DETAILS</h1>
                 <div className="row">
             {
-                    <div className="col-md-4 mt-3" key={this.props.product.item._id} >
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={this.props.product.item.imgUrl} />
+                    <div className="col-md-6" key={this.props.product.item._id} >
+                            <Card >
+                                
+                                    {/* <Card.Img variant="top" src={this.props.product.item.imgUrl} /> */}
+                                    <div className="col-md-8 m-3">
+                <SideBySideMagnifier
+  imageSrc={this.props.product.item.imgUrl}
+  imageAlt="Example"
+  largeImageSrc={largeImage}
+/>
+           </div>
+
                         <Card.Body>
                                 <Card.Title>{this.props.product.item.productname}</Card.Title>
                             <Card.Text>
@@ -47,7 +62,8 @@ export class Product extends Component {
             } 
        
         </div>
-            </div>
+                </div>
+                </div>
         )
     }
 };
